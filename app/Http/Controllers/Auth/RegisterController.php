@@ -6,6 +6,7 @@ use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use App\Role;
 
 class RegisterController extends Controller
 {
@@ -64,7 +65,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'username' => $data['username'],
             'password' => bcrypt($data['password']),
             'firstname' => $data['firstname'],
@@ -72,5 +73,11 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'gender' => $data['gender']
         ]);
+
+        // Set role
+        $role = Role::where('name', 'user')->first();
+        $user->roles()->attach($role);
+
+        return $user;
     }
 }
