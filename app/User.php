@@ -27,11 +27,19 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    /**
+     * User has many-to-many relation with Role
+     *
+     */
     public function roles()
     {
         return $this->belongsToMany('App\Role');
     }
 
+    /**
+     * Check if the user has a role, if not: return false
+     *
+     */
     public function hasAnyRole($roles)
     {
         if(is_array($roles)) {
@@ -48,6 +56,10 @@ class User extends Authenticatable
         return false;
     }
 
+    /**
+     * Check if user has a specific role
+     *
+     */
     public function hasRole($role)
     {
         if ($this->roles()->where('name', $role)->first()) {

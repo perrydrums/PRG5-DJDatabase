@@ -74,7 +74,7 @@ class RegisterController extends Controller
             'gender' => $data['gender']
         ]);
 
-        // Set role
+        // Set basic role: user
         $role = Role::where('name', 'user')->first();
         $user->roles()->attach($role);
 
