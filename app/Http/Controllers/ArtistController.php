@@ -8,6 +8,15 @@ use Illuminate\Http\Request;
 class ArtistController extends Controller
 {
     /**
+     * Check for permission
+     */
+    public function __construct()
+    {
+        // Minimal role: content-manager. Exclude the index and show pages.
+        $this->middleware('roles:content-manager', ['except' => ['index','show']]);
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response

@@ -37,26 +37,6 @@ class User extends Authenticatable
     }
 
     /**
-     * Check if the user has a role, if not: return false
-     *
-     */
-    public function hasAnyRole($roles)
-    {
-        if(is_array($roles)) {
-            foreach($roles as $role) {
-                if($this->hasRole($role)) {
-                    return true;
-                }
-            }
-        } else {
-            if($this->hasRole($roles)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
      * Check if user has a specific role
      *
      */
