@@ -20,13 +20,11 @@ class CheckRole
             return response("Insufficient permissions", 401);
         }
         $actions = $request->route()->getAction();
-        $roles;
+        $roles = null;
 
         // If a page has any permissions
         if(isset($actions['roles'])) {
             $roles = $actions['roles'];
-        } else {
-            $roles = null;
         }
 
         // Check if user has the role OR no permissions are set on the page

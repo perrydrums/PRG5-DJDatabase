@@ -12,6 +12,15 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <style>
+        .required:after{
+            content:' *';
+            color:red;
+            padding-left:5px;
+            font-size: 20px;
+        }
+    </style>
 </head>
 <body>
     <div id="app">
