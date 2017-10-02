@@ -73,7 +73,9 @@ class ArtistController extends Controller
      */
     public function show($id)
     {
-        //
+        $artists = new Artist;
+        $artist  = $artists->find($id);
+        return view('artists.show', array('artist' => $artist));
     }
 
     /**
