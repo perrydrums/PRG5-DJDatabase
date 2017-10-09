@@ -17,5 +17,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 
 Route::resource('/artists', 'ArtistController');
+Route::resource('/parties', 'PartyController');
 
 Auth::routes();
