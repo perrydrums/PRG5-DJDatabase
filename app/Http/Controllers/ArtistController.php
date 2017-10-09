@@ -46,7 +46,6 @@ class ArtistController extends Controller
      */
     public function store(Request $request)
     {
-
         $request->validate([
             'name'          => 'required|unique:artists|max:45',
             'firstname'     => 'required|max:45',
@@ -62,7 +61,6 @@ class ArtistController extends Controller
         $artist = $artist->create($request->all());
 
         return redirect()->route('artists.show', $artist->id);
-
     }
 
     /**
