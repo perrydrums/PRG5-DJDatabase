@@ -28,8 +28,9 @@ class User extends Authenticatable
     ];
 
     /**
-     * User has many-to-many relation with Role
+     * User has many-to-many relationship with Role
      *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function roles()
     {
@@ -37,8 +38,10 @@ class User extends Authenticatable
     }
 
     /**
-     * Check if user has a specific role
+     * Check if the user has any role
      *
+     * @param $role
+     * @return bool
      */
     public function hasRole($role)
     {

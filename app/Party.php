@@ -14,4 +14,14 @@ class Party extends Model
     protected $fillable = [
         'name', 'organizer', 'location', 'date', 'time', 'picture'
     ];
+
+    /**
+     * Party has many-to-many relationship with Artist
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function artists()
+    {
+        return $this->belongsToMany('App\Artist');
+    }
 }
