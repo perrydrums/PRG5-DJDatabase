@@ -64,7 +64,7 @@ class PartyController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Party  $party
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -77,34 +77,54 @@ class PartyController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Party  $party
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Party $party)
+    public function edit($id)
     {
-        //
+        $parties = new Party;
+        $party  = $parties->find($id);
+        return view('parties.edit', array('party' => $party));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Party  $party
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Party $party)
+    public function update(Request $request, $id)
     {
-        //
+        $party = new Party;
+        $party = $party->find($id);
+
+        $request->validate([
+            'name'          => 'required|max:45',
+            'organizer'     => 'required|max:45',
+            'location'      => 'required|max:80',
+            'date'          => 'required|date',
+            'time'          => 'required',
+            'picture'       => 'max:150',
+        ]);
+
+        $party->update($request->all());
+
+        return redirect()->route('parties.show', $id);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Party  $party
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Party $party)
+    public function destroy($id)
     {
-        //
+        $party = new Party;
+        $party = $party->find($id);
+        $party->delete();
+
+        return redirect()->route('parties.index');
     }
 }

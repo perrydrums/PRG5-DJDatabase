@@ -8,6 +8,11 @@
             <h1>Recently added Parties</h1>
             <hr>
 
+            @if (!count($parties))
+
+                There are no parties...
+
+            @endif
             @foreach($parties as $party)
 
             <table width="100%">

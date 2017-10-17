@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Artist;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class ArtistController extends Controller
 {
@@ -84,7 +85,9 @@ class ArtistController extends Controller
      */
     public function edit($id)
     {
-        //
+        $artists = new Artist;
+        $artist  = $artists->find($id);
+        return view('artists.edit', array('artist' => $artist));
     }
 
     /**
@@ -96,7 +99,23 @@ class ArtistController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $artist = new Artist;
+        $artist = $artist->find($id);
+
+        $request->validate([
+            'name'          => 'required|max:45|unique:artists,name,' . $artist->id,
+            'firstname'     => 'required|max:45',
+            'lastname'      => 'required|max:45',
+            'alias'         => 'max:45',
+            'website'       => 'max:80',
+            'spotify'       => 'max:80',
+            'soundcloud'    => 'max:80',
+            'picture'       => 'max:150',
+        ]);
+
+        $artist->update($request->all());
+
+        return redirect()->route('artists.show', $id);
     }
 
     /**
@@ -107,6 +126,10 @@ class ArtistController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $artist = new Artist;
+        $artist = $artist->find($id);
+        $artist->delete();
+
+        return redirect()->route('artists.index');
     }
 }

@@ -4,15 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 
-class HomeController extends Controller
+class ProfileController extends Controller
 {
     /**
-     * Show the application dashboard.
+     * Show the profile page
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        return view('home', array('user' => Auth::user()));
+        return view('user.profile', array('user' => Auth::user()));
     }
 }

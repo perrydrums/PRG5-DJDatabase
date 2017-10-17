@@ -8,6 +8,11 @@
             <h1>Recently added Artists</h1>
             <hr>
 
+            @if (!count($artists))
+
+                There are no artists...
+
+            @endif
             @foreach($artists as $artist)
 
             <table width="100%">
