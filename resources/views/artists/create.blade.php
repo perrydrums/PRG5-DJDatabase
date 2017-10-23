@@ -30,6 +30,15 @@
                 {{ Form::label('alias', 'DJ Alias') }}
                 {{ Form::text('alias', null, array('class' => 'form-control')) }}
 
+                {{ Form::label('genre', 'Genre') }}
+                <select class="form-control" name="genre">
+                    @foreach($genres as $genre)
+
+                        <option value={{ $genre['id'] }}>{{ $genre['name'] }}</option>
+
+                    @endforeach
+                </select>
+
                 {{ Form::label('website', 'Link to website') }}
                 {{ Form::text('website', null, array('class' => 'form-control')) }}
 

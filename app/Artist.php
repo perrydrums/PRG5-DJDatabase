@@ -12,7 +12,7 @@ class Artist extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'firstname', 'lastname', 'alias', 'website', 'spotify', 'soundcloud', 'picture'
+        'name', 'firstname', 'lastname', 'alias', 'genre', 'website', 'spotify', 'soundcloud', 'picture'
     ];
 
     /**
@@ -23,5 +23,15 @@ class Artist extends Model
     public function parties()
     {
         return $this->belongsToMany('App\Party');
+    }
+
+    /**
+     * Has one-to-many relationship with Genre
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function genres()
+    {
+        return $this->belongsTo('App\Genre');
     }
 }

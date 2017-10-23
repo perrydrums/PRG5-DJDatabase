@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Artist;
+use App\Genre;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
 
 class ArtistController extends Controller
 {
@@ -36,7 +36,8 @@ class ArtistController extends Controller
      */
     public function create()
     {
-        return view('artists.create');
+        $genres = Genre::all();
+        return view('artists.create', array('genres' => $genres));
     }
 
     /**
@@ -87,7 +88,9 @@ class ArtistController extends Controller
     {
         $artists = new Artist;
         $artist  = $artists->find($id);
-        return view('artists.edit', array('artist' => $artist));
+
+        $genres  = Genre::all();
+        return view('artists.edit', array('artist' => $artist, 'genres' => $genres));
     }
 
     /**

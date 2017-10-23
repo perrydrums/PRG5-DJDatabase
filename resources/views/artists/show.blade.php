@@ -21,6 +21,12 @@
                     <td>{{ $artist['alias'] }}</td>
                 </tr>
                 @endif
+                @if(isset($artist['genre']))
+                    <tr>
+                        <td width="50%">Genre</td>
+                        <td>{{ $artist['genre'] }}</td>
+                    </tr>
+                @endif
                 @if(isset($artist['website']))
                 <tr>
                     <td width="50%">Website</td>
