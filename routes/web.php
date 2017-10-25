@@ -21,4 +21,6 @@ Route::get('/profile', 'ProfileController@index')->name('profile');
 Route::resource('/artists', 'ArtistController');
 Route::resource('/parties', 'PartyController');
 
+Route::post('comments/{id}', 'CommentsController@store')->name('comments.store');
+
 Auth::routes();

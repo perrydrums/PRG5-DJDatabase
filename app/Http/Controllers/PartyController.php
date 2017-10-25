@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Party;
+use App\PartyComment;
 use Illuminate\Http\Request;
 
 class PartyController extends Controller
@@ -71,6 +72,14 @@ class PartyController extends Controller
     {
         $parties = new Party;
         $party  = $parties->find($id);
+
+        $comments = new PartyComment();
+
+        $party['comments'] = $comments
+            ->where('resource_id', $id)
+            ->orderBy('created_at', 'DESC')
+            ->get();
+
         return view('parties.show', array('party' => $party));
     }
 

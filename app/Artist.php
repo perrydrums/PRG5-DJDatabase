@@ -34,4 +34,12 @@ class Artist extends Model
     {
         return $this->belongsTo('App\Genre');
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function comments()
+    {
+        return $this->belongsToMany('App\ArtistComment');
+    }
 }

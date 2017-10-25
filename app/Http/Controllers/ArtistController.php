@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Artist;
+use App\ArtistComment;
 use App\Genre;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ArtistController extends Controller
 {
@@ -73,8 +75,21 @@ class ArtistController extends Controller
      */
     public function show($id)
     {
-        $artists = new Artist;
+        $artists  = new Artist;
+        $genre    = new Genre;
         $artist  = $artists->find($id);
+
+        $comments = new ArtistComment();
+
+        $artist['comments'] = $comments
+            ->where('resource_id', $id)
+            ->orderBy('created_at', 'DESC')
+            ->get();
+
+        if ($artist['genre']) {
+            $artist['genre_name'] = $genre->find($artist['genre'])->getAttribute('name');
+        }
+
         return view('artists.show', array('artist' => $artist));
     }
 
