@@ -10,6 +10,15 @@ use Illuminate\Support\Facades\Auth;
 class CommentsController extends Controller
 {
     /**
+     * Check for permission
+     */
+    public function __construct()
+    {
+        // Minimal role: user (logged in)
+        $this->middleware('roles:user', ['except' => ['index','show']]);
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request

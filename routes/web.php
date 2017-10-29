@@ -16,8 +16,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/profile', 'ProfileController@index')->name('profile');
 
-
-
 Route::resource('/artists', 'ArtistController')->except('index');
 Route::get('/artists', 'ArtistController@index')->name('artists.index');
 
@@ -32,6 +30,8 @@ Route::post('comments/{id}', 'CommentsController@store')->name('comments.store')
 
 Route::get('/error/access', 'ErrorController@access')->name('error.access');
 Route::get('/error/login', 'ErrorController@login')->name('error.login');
+
+Route::post('/admin/permissions', 'AdminController@permissions')->name('admin.permissions');
 
 
 Auth::routes();

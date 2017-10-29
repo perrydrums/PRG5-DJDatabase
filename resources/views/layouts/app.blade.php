@@ -8,18 +8,44 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'DJDatabase') }}</title>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
     <style>
-        .required:after{
+        .required:after {
             content:' *';
             color:red;
             padding-left:5px;
             font-size: 20px;
         }
+
+        .tr-highlight {
+            transition: background-color 1s ease, border-color 1s ease;
+            border-left: 1px solid transparent;
+            border-right: 1px solid transparent;
+        }
+
+        .tr-highlight:hover {
+            background-color: #f8eded;
+            border-color: red;
+        }
+
+         DIV.table
+         {
+             display:table;
+         }
+        FORM.tr, DIV.tr
+        {
+            display:table-row;
+        }
+        SPAN.td
+        {
+            display:table-cell;
+        }
+
+
     </style>
 </head>
 <body>
@@ -61,6 +87,11 @@
                                 </a>
 
                                 <ul class="dropdown-menu" role="menu">
+                                    <li>
+                                        <a href="{{ route('profile') }}">
+                                            Profile
+                                        </a>
+                                    </li>
                                     <li>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();

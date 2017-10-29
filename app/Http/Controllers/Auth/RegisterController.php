@@ -75,7 +75,7 @@ class RegisterController extends Controller
         ]);
 
         // Set basic role: user
-        $role = Role::where('name', 'user')->first();
+        $role = Role::where('name', '=' ,'user')->first();
         $user->roles()->attach($role);
 
         return $user;
