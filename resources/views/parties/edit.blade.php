@@ -5,7 +5,7 @@
 
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
-            <h1>Add a new Party</h1>
+            <h1>Edit {{ $party['name'] }}</h1>
             <hr>
 
                 @foreach ($errors->all() as $error)
