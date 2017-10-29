@@ -11,6 +11,7 @@ class CheckRole
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next
+     * @param  $role
      * @return mixed
      */
     public function handle($request, Closure $next, $role)
@@ -18,10 +19,12 @@ class CheckRole
         // If the user hasn't got the role
         if($request->user()) {
             if(!$request->user()->hasRole($role)) {
-                return response("Sorry, you are not allowed to access this page :(", 401);
+                return redirect()->route('error.access');
             }
+            // If the user has the specific role
             return $next($request);
         }
-        return response("Please log in first", 401);
+        // If not logged in
+        return redirect()->route('error.login');
     }
 }

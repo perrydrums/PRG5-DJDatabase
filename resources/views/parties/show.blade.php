@@ -34,6 +34,8 @@
                 @endif
             </table>
 
+            <a href="/parties/{{ $party['id'] }}/edit">Edit</a>
+
             <div style="margin-top: 100px;">
 
                 <hr>

@@ -47,6 +47,8 @@
                 @endif
             </table>
 
+            <a href="/artists/{{ $artist['id'] }}/edit">Edit</a>
+
 
 
             <div style="margin-top: 100px;">

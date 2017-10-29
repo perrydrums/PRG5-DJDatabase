@@ -29,4 +29,9 @@ Route::post('/artists/filter', 'FilterController@filter')->name('artists.filter'
 
 Route::post('comments/{id}', 'CommentsController@store')->name('comments.store');
 
+
+Route::get('/error/access', 'ErrorController@access')->name('error.access');
+Route::get('/error/login', 'ErrorController@login')->name('error.login');
+
+
 Auth::routes();
