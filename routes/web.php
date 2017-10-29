@@ -18,8 +18,14 @@ Route::get('/profile', 'ProfileController@index')->name('profile');
 
 
 
-Route::resource('/artists', 'ArtistController');
+Route::resource('/artists', 'ArtistController')->except('index');
+Route::get('/artists', 'ArtistController@index')->name('artists.index');
+
+Route::post('/filter', 'FilterController@genre')->name('filter.genre');
+
 Route::resource('/parties', 'PartyController');
+
+Route::post('/artists/filter', 'FilterController@filter')->name('artists.filter');
 
 Route::post('comments/{id}', 'CommentsController@store')->name('comments.store');
 

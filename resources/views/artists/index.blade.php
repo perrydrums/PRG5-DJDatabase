@@ -8,6 +8,44 @@
             <h1>Recently added Artists</h1>
             <hr>
 
+                <table width="100%">
+                    <tr>
+                        <td width="50%">
+                            {!! Form::open(array('route' => 'filter.genre', 'class' => 'form-inline')) !!}
+
+                            {{ csrf_field() }}
+
+                            {{ Form::label('genre', 'Genre') }}
+
+                            <select class="form-control" name="genre_id">
+                                @foreach($genres as $genre)
+
+                                    <option value={{ $genre['id'] }}>{{ $genre['name'] }}</option>
+
+                                @endforeach
+                            </select>
+
+                            {{ Form::submit('Filter', array('class' => 'btn btn-default')) }}
+
+                            {!! Form::close() !!}
+                        </td>
+                        <td>
+                            <div style="color: red; text-align: right">
+                                <?php
+                                if (isset($_POST['genre_id'])) {
+                                    $genre = new \App\Genre;
+                                    $genre = $genre->find($_POST['genre_id']);
+
+                                    echo 'Showing ' . $genre['name'] . ' artists';
+                                }
+                                ?>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+
+            <hr>
+
             @if (!count($artists))
 
                 There are no artists...

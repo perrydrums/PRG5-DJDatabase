@@ -27,8 +27,11 @@ class ArtistController extends Controller
     public function index()
     {
         $artists = new Artist;
-        $artists = $artists->orderBy('created_at', 'desc')->take(5)->get();
-        return view('artists.index', array('artists' => $artists));
+        $artists = $artists->orderBy('created_at', 'desc');
+        $artists = $artists->take(5)->get();
+        $genres = Genre::all();
+
+        return view('artists.index', array('artists' => $artists, 'genres' => $genres));
     }
 
     /**
