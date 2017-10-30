@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Artist;
 use App\ArtistComment;
 use App\Genre;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class ArtistController extends Controller
@@ -28,10 +30,17 @@ class ArtistController extends Controller
     {
         $artists = new Artist;
         $artists = $artists->orderBy('created_at', 'desc');
-        $artists = $artists->take(5)->get();
+        $artists = $artists->get();
         $genres = Genre::all();
 
-        return view('artists.index', array('artists' => $artists, 'genres' => $genres));
+        $meta['is_content_manager'] = null;
+        $user = new User();
+        if($user = $user->find(Auth::id())) {
+            $meta['is_content_manager'] = $user->hasRole('content-manager');
+        }
+
+
+        return view('artists.index', array('artists' => $artists, 'genres' => $genres, 'meta' => $meta));
     }
 
     /**

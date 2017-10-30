@@ -5,7 +5,18 @@
 
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
-            <h1>Recently added Parties</h1>
+            <h1>
+                Recently added Parties
+
+                <span style="text-align: right">
+                    @if($meta['is_content_manager'])
+
+                        <a href="/parties/create" class="btn btn-default">Add</a>
+
+                    @endif
+                </span>
+
+            </h1>
             <hr>
 
             @if (!count($parties))

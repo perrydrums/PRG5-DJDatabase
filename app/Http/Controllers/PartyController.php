@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Party;
 use App\PartyComment;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PartyController extends Controller
 {
@@ -25,8 +27,14 @@ class PartyController extends Controller
     public function index()
     {
         $parties = new Party;
-        $parties = $parties->orderBy('updated_at', 'desc')->take(5)->get();
-        return view('parties.index', array('parties' => $parties));
+        $parties = $parties->orderBy('updated_at', 'desc')->get();
+        $meta['is_content_manager'] = null;
+        $user = new User();
+        if($user = $user->find(Auth::id())) {
+            $meta['is_content_manager'] = $user->hasRole('content-manager');
+        }
+
+        return view('parties.index', array('parties' => $parties, 'meta' => $meta));
     }
 
     /**

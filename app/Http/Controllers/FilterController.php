@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Artist;
 use App\Genre;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FilterController extends Controller
 {
@@ -25,6 +27,12 @@ class FilterController extends Controller
         $artists = $artists->orderBy('created_at', 'desc');
         $artists = $artists->take(5)->get();
 
-        return view('artists.index', array('artists' => $artists, 'genres' => $genres));
+        $meta['is_content_manager'] = null;
+        $user = new User();
+        if($user = $user->find(Auth::id())) {
+            $meta['is_content_manager'] = $user->hasRole('content-manager');
+        }
+
+        return view('artists.index', array('artists' => $artists, 'genres' => $genres, 'meta' => $meta));
     }
 }

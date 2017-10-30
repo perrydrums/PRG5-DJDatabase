@@ -5,7 +5,18 @@
 
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
-            <h1>Recently added Artists</h1>
+            <h1>
+                Recently added Artists
+
+                <span style="text-align: right">
+                    @if($meta['is_content_manager'])
+
+                        <a href="/artists/create" class="btn btn-default">Add</a>
+
+                    @endif
+                </span>
+
+            </h1>
             <hr>
 
                 <table width="100%">
